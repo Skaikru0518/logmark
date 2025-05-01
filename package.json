@@ -1,0 +1,57 @@
+{
+  "name": "logmark",
+  "version": "1.0.0",
+  "description": "A simple colored console logger with timestamps",
+  "keywords": [
+    "console",
+    "console",
+    "log",
+    "clg",
+    "log",
+    "custom",
+    "color",
+    "log",
+    "colorlog",
+    "customcolor",
+    "colored",
+    "terminal",
+    "colored",
+    "terminal",
+    "log",
+    "debugging"
+  ],
+  "homepage": "https://github.com/Skaikru0518/logmark#readme",
+  "bugs": {
+    "url": "https://github.com/Skaikru0518/logmark/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Skaikru0518/logmark.git"
+  },
+  "license": "MIT",
+  "author": "Skaikru",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint src/**/*.ts",
+    "test": "jest"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3"
+  }
+}
