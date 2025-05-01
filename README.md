@@ -8,7 +8,7 @@ Easily integrate it into your project for clear, readable, and configurable logg
 ## 🚀 Installation
 
 ```bash
-npm install logmark
+npm install @skaikru/logmark@latest
 ```
 
 ---
