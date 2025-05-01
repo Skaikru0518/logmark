@@ -1,5 +1,5 @@
 {
-  "name": "logmark",
+  "name": "@skaikru/logmark",
   "version": "1.0.0",
   "description": "A simple colored console logger with timestamps",
   "keywords": [
