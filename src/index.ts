@@ -15,11 +15,15 @@ const getFormattedDateTime = (format: 'short' | 'full' = 'full'): string => {
     : `${hours}:${minutes}:${seconds}`;
 };
 
-const formatMessage = (message: string | object): string => {
-  if (typeof message === 'object') {
-    return JSON.stringify(message, null, 2);
-  }
-  return message;
+const formatMessages = (...messages: (string | object)[]): string => {
+  return messages
+    .map((msg) => {
+      if (typeof msg === 'object') {
+        return JSON.stringify(msg, null, 2);
+      }
+      return msg;
+    })
+    .join(' ');
 };
 
 export const createLogmark = (options: LogmarkOptions = {}): Logmark => {
@@ -30,34 +34,41 @@ export const createLogmark = (options: LogmarkOptions = {}): Logmark => {
   } = options;
 
   const logmark: Logmark = {
-    info: (message: string | object): void => {
-      const formattedMessage = formatMessage(message);
+    info: (...messages: (string | object)[]): void => {
+      const formattedMessage = formatMessages(...messages);
       console.log(
         `${enableColors ? chalk.green('[INFO]') : '[INFO]'} ${getFormattedDateTime(timeFormat)} - ${formattedMessage}`,
       );
     },
 
-    warn: (message: string | object): void => {
-      const formattedMessage = formatMessage(message);
+    warn: (...messages: (string | object)[]): void => {
+      const formattedMessage = formatMessages(...messages);
       console.warn(
         `${enableColors ? chalk.yellow('[WARN]') : '[WARN]'} ${getFormattedDateTime(timeFormat)} - ${formattedMessage}`,
       );
     },
 
-    error: (message: string | object): void => {
-      const formattedMessage = formatMessage(message);
+    error: (...messages: (string | object)[]): void => {
+      const formattedMessage = formatMessages(...messages);
       console.error(
         `${enableColors ? chalk.red('[ERROR]') : '[ERROR]'} ${getFormattedDateTime(timeFormat)} - ${formattedMessage}`,
       );
     },
 
-    debug: (message: string | object): void => {
+    debug: (...messages: (string | object)[]): void => {
       if (process.env.NODE_ENV !== 'production' || debugInProduction) {
-        const formattedMessage = formatMessage(message);
+        const formattedMessage = formatMessages(...messages);
         console.debug(
           `${enableColors ? chalk.blue('[DEBUG]') : '[DEBUG]'} ${getFormattedDateTime(timeFormat)} - ${formattedMessage}`,
         );
       }
+    },
+
+    success: (...messages: (string | object)[]): void => {
+      const formattedMessage = formatMessages(...messages);
+      console.log(
+        `${enableColors ? chalk.greenBright('[SUCCESS]') : '[SUCCESS]'} ${getFormattedDateTime(timeFormat)} - ${formattedMessage}`,
+      );
     },
   };
 
