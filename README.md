@@ -22,6 +22,11 @@ logmark.info('Server started');
 logmark.warn('Resource usage high');
 logmark.error('Connection failed');
 logmark.debug('Request payload:', { id: 123, user: 'john' });
+logmark.success('User registration completed!');
+logmark.success('Registration completed', {
+  userId: 123,
+  email: 'test@example.com',
+});
 ```
 
 ---
@@ -40,6 +45,7 @@ const customLogmark = createLogmark({
 });
 
 customLogmark.info('Custom logger initialized');
+customLogmark.success('Custom success message', { custom: true });
 ```
 
 ---
@@ -58,19 +64,22 @@ The `createLogmark` function accepts an options object:
 
 ## 📝 Log Levels
 
-- `info(message: string | object)`  
+- `info(...messages: string | object)`  
   Informational messages (green).
 
-- `warn(message: string | object)`  
+- `warn(...messages: string | object)`  
   Warnings (yellow).
 
-- `error(message: string | object)`  
+- `error(...messages: string | object)`  
   Errors (red).
 
-- `debug(message: string | object)`  
+- `debug(...messages: string | object)`  
   Debugging information (blue, hidden in production by default).
 
-You can log both strings and objects. Objects will be pretty-printed as JSON.
+- `success(...messages: string | object)`  
+  Success messages (bright green).
+
+You can log both strings and objects, and pass multiple parameters. Objects will be pretty-printed as JSON.
 
 ---
 
@@ -78,10 +87,12 @@ You can log both strings and objects. Objects will be pretty-printed as JSON.
 
 - 🎨 **Colored output** (configurable)
 - ⏰ **Automatic timestamps** (full or short format)
-- 📝 **Multiple log levels**: info, warn, error, debug
+- 📝 **Multiple log levels**: info, warn, error, debug, success
+- 🟢 **Success messages** (bright green)
 - 🔍 **Debug messages** (configurable for production)
 - 💪 **Full TypeScript support**
 - 🎯 **Object logging** with pretty-print
+- ➕ **Multiple arguments** support for all log levels
 
 ---
 
@@ -92,9 +103,11 @@ import { logmark, createLogmark } from 'logmark';
 
 logmark.info('Default logger');
 logmark.error({ error: 'Something went wrong', code: 500 });
+logmark.success('Everything went fine!', { status: 'ok' });
 
 const logger = createLogmark({ enableColors: false, timeFormat: 'short' });
 logger.warn('Colors are disabled, short time format');
+logger.success('Short format, no colors', { id: 42 });
 ```
 
 ---
